@@ -109,6 +109,12 @@ color: red;
     margin: 1%;
 }
 
+#scoreList {
+    font-size: 1.5rem;
+    margin: 1%;
+    background-color: #5b8cf5;
+    width: max-content;
+}
 
 h2 {
     font-size: 1.5rem;
@@ -125,10 +131,6 @@ h2 {
     margin: 1%;
 }
 
-.initialBox {
-    display: flex;
-    display: inline-block;
-}
 
 /* Buttons */
 .button {
@@ -144,6 +146,10 @@ h2 {
     font-size: 1.2rem;
     color: white;
     padding: 0% 5%;
+}
+
+.controls {
+    display: flex;
 }
 
 .hide {

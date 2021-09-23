@@ -74,8 +74,11 @@ var ansBtn = document.getElementById('ansBtn');
 var ansCorrect = document.getElementById('correct');
 var ansWrong = document.getElementById('wrong');
 var submitFormEl = document.getElementById('submitForm');
+var scoreEl = document.getElementById('scoreInfo');
 var highScoreEl = document.getElementById('highScore');
 var timeEl = document.getElementById('timerCount');
+var initials = document.getElementById('initials');
+var scoreList = document.getElementById('scoreList');
 var currentQuestion;
 var secondsLeft = 60;
 var timerInterval;
@@ -84,7 +87,6 @@ startBtn.addEventListener("click", startQuiz)
 
 //Start the quiz function
 function startQuiz() {
-  console.log('start')
   startBtn.classList.add('hide');
   textBox.classList.add('hide');
   questionBox.classList.remove('hide');
@@ -128,6 +130,7 @@ function userChoice(event){
     }
   } else {
     ansWrong.classList.remove('hide');
+    secondsLeft = secondsLeft - 10;
     while (ansBtn.firstChild) {
       ansBtn.removeChild(ansBtn.firstChild);
     }
@@ -135,22 +138,20 @@ function userChoice(event){
   if (quizQuestions.length > currentQuestion){
     nextQuestion();
   } else {
-    submitForm();
     clearInterval(timerInterval);
-    
+    openSubmitForm();
   }
 }
 
 
-function submitForm() {
+function openSubmitForm() {
   questionBox.classList.add('hide');
   ansBtn.classList.add('hide');
+  startBtn.classList.add('hide');
+  textBox.classList.add('hide');
   submitFormEl.classList.remove('hide');
-  var score = document.createElement("h2");
-  var scoreTitle = submitFormEl.firstElementChild;
-    scoreTitle.appendChild(score);
-    score.innerHTML = 'Your Final Score is ' + secondsLeft;
-  console.log(secondsLeft);
+  document.querySelector(".scoreInfo").textContent = 'Your Final Score is ' + secondsLeft;
+  
 }
 
 function clearEl() {
@@ -159,12 +160,35 @@ function clearEl() {
   
 }
 
-submitBtn.addEventListener('click',submitEl)
-function submitEl() {
+submitBtn.addEventListener('click', function (event) {
+  event.preventDefault();
   highScoreEl.classList.remove('hide');
-  console.log('clicked on submit');
-  
-}
+  submitFormEl.classList.add('hide');
+  var user = {
+    initialsName: initials.value.trim(),
+    score: secondsLeft
+  };
+  initials.value='';
+  localStorage.setItem("score", JSON.stringify(user));
+  var scoreEl = JSON.parse(localStorage.getItem("score"));
+  if (scoreEl !== null) {
+    var winner = document.createElement('li');
+    winner.innerText = scoreEl.initialsName + " - " + scoreEl.score;
+    scoreList.appendChild(winner);
+  }
+
+})
+
+goBackBtn.addEventListener("click", function(){
+  startBtn.classList.remove('hide');
+  textBox.classList.remove('hide');
+  highScoreEl.classList.add('hide');
+  clearInterval(timerInterval);
+  secondsLeft = 60;
+  timeEl.textContent = secondsLeft;
+  // submitFormEl.removeChild(submitFormEl.lastElementChild);
+
+});
 
 function setTime() {
   // Sets interval in variable
@@ -176,7 +200,22 @@ function setTime() {
       // Stops execution of action at set interval
       clearInterval(timerInterval);
       // Calls function to create and append image
-      submitForm();
+      openSubmitForm();
     }
   }, 1000);
+}
+
+clearBtn.addEventListener("click", function(){
+  while (scoreList.childElementCount > 0) {
+    scoreList.removeChild(scoreList.lastChild);
+  }
+});
+
+function viewScoreBtn(){
+  highScoreEl.classList.remove('hide');
+  startBtn.classList.add('hide');
+  textBox.classList.add('hide');
+  submitFormEl.classList.add('hide');
+  questionBox.classList.add('hide');
+  ansBtn.classList.add('hide');
 }

@@ -11,7 +11,7 @@
 
 <body>
     <header class = "headBar">
-        <a href="#highScore" class = "viewScores">View Highscores</a>
+        <a href="javascript:" onclick = 'viewScoreBtn' class = "viewScores">View Highscores</a>
         <div class= "quizTimer">
           <div>Time: </div>
           <div id = "timerCount">60</div>
@@ -27,20 +27,20 @@
         </section>
         <section id = "submitForm" class = "hide">
           <h1>All Done!</h1><br>
-          <br>
+          <h2 class = 'scoreInfo'></h2><br>
           <form class = "name">
-            <label>Enter Initials: </label>
-            <input type="text" onClick = clearEl()>
+            <label for = "initials">Enter Initials: </label>
+            <input id = "initials" name = "initials" type="text" maxlength="4" size="4" onClick = clearEl()>
             <button id="submitBtn" class= "submitBtn button">Submit</button>
           </form><br>
         </section>
         <section id = "highScore" class = 'hide'>
           <h1>HighScores</h1><br>
-          <ul></ul><br><br>
-          <div>
-          <button id="goBackBtn" class="goBackBtn button">Go Back</button>
-          <button id="clearBtn" class="clearBtn button">Clear Highscore</button>
-          </div>
+          <ul id = "scoreList"></ul><br><br>
+          <div class = "controls">
+          <button id="goBackBtn" class="goBackBtn button controls">Go Back</button>
+          <button id="clearBtn" class="clearBtn button controls">Clear Highscore</button>
+          </div> 
         </section>
         <section class = "quizQuestions">
           <h1  id="questionBox" class = "hide">Question:</h1><br>
