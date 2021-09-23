@@ -44,20 +44,27 @@
     width: 50%;
     height: 50%;
     display: grid;
-    justify-content: center;
-    align-items: center;
 }
 
 /* Start Page */
-#textBox {
+#textBoxContainer {
     font-size: 1.5rem;
     margin: 1%;
+    display: flex;
+    flex-direction: column ;
+    justify-content: center;
 }
 
 /* Questions page */
 #questionBox {
     font-size: 1.5rem;
     margin: 1%;
+}
+
+.quizQuestions {
+    display: flex;
+    flex-direction: column;
+    justify-items: right;
 }
 
 #correct {
@@ -77,14 +84,50 @@ color: red;
 }
 
 /* Submit Form */
-
-
-
-
-.controls {
-    display: flex;
+.submitForm {
+    margin: auto;
+    padding: 2%;
+    background-color: lightblue;
+    border: 5px solid aqua;
+    border-radius: 5px;
+    color: white;
+    font-weight: bolder;
+    width: 50%;
+    height: 50%;
+    display: grid;
     justify-content: center;
     align-items: center;
+}
+
+#submitForm h1 {
+    font-size: 2rem;
+    margin: 1%;
+}
+
+#highScore h1 {
+    font-size: 2rem;
+    margin: 1%;
+}
+
+
+h2 {
+    font-size: 1.5rem;
+    padding: 5% 0%;
+}
+
+.name {
+    font-size: 1.5rem;
+    margin: 1%;
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: center;
+    margin: 1%;
+}
+
+.initialBox {
+    display: flex;
+    display: inline-block;
 }
 
 /* Buttons */
@@ -98,9 +141,9 @@ color: red;
     align-items: center;
     background: linear-gradient(to top, #22cf12 0%, #49cf3c 100%);
     margin: 1%;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     color: white;
-    
+    padding: 0% 5%;
 }
 
 .hide {

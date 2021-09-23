@@ -5,36 +5,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
     <title>Coding Quiz Game</title>
-    <link type='text/css' rel='stylesheet' href='../coding-quiz-game/assets/css/reset.css' />
+    <link type='text/css' rel='stylesheet' href='./assets/css/reset.css' />
     <link type='text/css' rel='stylesheet' href='./assets/css/style.css' />
 </head>
 
 <body>
     <header class = "headBar">
-        <a href="./assets/html/highscores.html" class = "viewScores">View Highscores</a>
+        <a href="#highScore" class = "viewScores">View Highscores</a>
         <div class= "quizTimer">
           <div>Time: </div>
-          <div class="timerCount">60</div>
+          <div id = "timerCount">60</div>
         </div>
     </header>
     <main>
       <card class = "container">
-        <div id="textBox">
-          Try to answers the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!
-        </div>
-        <div id="questionBox" class = "hide">Question:</div>
-        <div id = "ansBtn" class = "hide">
-        </div>
-        <section class="controls">
+        <section id = "textBoxContainer">
+          <div id = "textBox"> 
+            Try to answers the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!
+          </div><br>
           <button id="startBtn" class="startBtn button">Start</button>
-          <button id="submitBtn" class="submitBtn button hide">Submit</button>
-          <button id="goBackBtn" class="goBackBtn button hide">Go Back</button>
-          <button id="clearBtn" class="clearBtn button hide">Clear Highscore</button>
+        </section>
+        <section id = "submitForm" class = "hide">
+          <h1>All Done!</h1><br>
+          <br>
+          <form class = "name">
+            <label>Enter Initials: </label>
+            <input type="text" onClick = clearEl()>
+            <button id="submitBtn" class= "submitBtn button">Submit</button>
+          </form><br>
+        </section>
+        <section id = "highScore" class = 'hide'>
+          <h1>HighScores</h1><br>
+          <ul></ul><br><br>
+          <div>
+          <button id="goBackBtn" class="goBackBtn button">Go Back</button>
+          <button id="clearBtn" class="clearBtn button">Clear Highscore</button>
+          </div>
+        </section>
+        <section class = "quizQuestions">
+          <h1  id="questionBox" class = "hide">Question:</h1><br>
+          <div id = "ansBtn" class = "hide"></div><br>
         </section>
         <section>
           <p id = "correct" class = "hide">Correct!!</p>
           <p id = "wrong" class = "hide">Wrong!!</p>
         </section>
+        
       </card>
     </main>
 
@@ -44,3 +60,4 @@
 
 </html>
  
+

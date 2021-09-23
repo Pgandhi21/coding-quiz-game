@@ -73,7 +73,12 @@ var questionBox = document.getElementById('questionBox');
 var ansBtn = document.getElementById('ansBtn');
 var ansCorrect = document.getElementById('correct');
 var ansWrong = document.getElementById('wrong');
+var submitFormEl = document.getElementById('submitForm');
+var highScoreEl = document.getElementById('highScore');
+var timeEl = document.getElementById('timerCount');
 var currentQuestion;
+var secondsLeft = 60;
+var timerInterval;
 
 startBtn.addEventListener("click", startQuiz)
 
@@ -85,18 +90,19 @@ function startQuiz() {
   questionBox.classList.remove('hide');
   ansBtn.classList.remove('hide');
   currentQuestion = 0;
+  setTime();
   nextQuestion();
 }
 
 
 //Calls for next question
 function nextQuestion() {
-
   showQues(quizQuestions[currentQuestion]);
+  currentQuestion++;
 }
 
 function showQues(quiz){
-  questionBox.innerHTML = quiz.question;
+  questionBox.innerText = quiz.question;
   for(var i = 0; i < quiz.choices.length; i++) {
     var button = document.createElement('button');
     button.innerText = quiz.choices[i].text;
@@ -126,16 +132,51 @@ function userChoice(event){
       ansBtn.removeChild(ansBtn.firstChild);
     }
   }
-  currentQuestion++;
-  if (quizQuestions.length > currentQuestion + 1){
+  if (quizQuestions.length > currentQuestion){
     nextQuestion();
   } else {
     submitForm();
+    clearInterval(timerInterval);
+    
   }
 }
 
-function submitForm() {
-  
 
+function submitForm() {
+  questionBox.classList.add('hide');
+  ansBtn.classList.add('hide');
+  submitFormEl.classList.remove('hide');
+  var score = document.createElement("h2");
+  var scoreTitle = submitFormEl.firstElementChild;
+    scoreTitle.appendChild(score);
+    score.innerHTML = 'Your Final Score is ' + secondsLeft;
+  console.log(secondsLeft);
 }
 
+function clearEl() {
+  ansWrong.classList.add('hide');
+  ansCorrect.classList.add('hide');
+  
+}
+
+submitBtn.addEventListener('click',submitEl)
+function submitEl() {
+  highScoreEl.classList.remove('hide');
+  console.log('clicked on submit');
+  
+}
+
+function setTime() {
+  // Sets interval in variable
+  timerInterval = setInterval(function() {
+    secondsLeft--;
+    timeEl.textContent = secondsLeft;
+
+    if(secondsLeft === 0) {
+      // Stops execution of action at set interval
+      clearInterval(timerInterval);
+      // Calls function to create and append image
+      submitForm();
+    }
+  }, 1000);
+}
